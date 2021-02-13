@@ -1,0 +1,1 @@
+Regarder si les variables sont supprimés en mode débbuger

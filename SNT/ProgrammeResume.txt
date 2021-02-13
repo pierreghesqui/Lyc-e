@@ -1,0 +1,50 @@
+
+THEMATIQUE : 
+- Internet---------------------------------------------------------
+- Web--------------------------------------------------------------
+- Réseaux sociaux
+- Les données structurées et leur traitement-----------------------
+- Localisation, cartographie et mobilité---------------------------
+- Informatique embarquée et objet connectés------------------------ 
+- La photographie numérique----------------------------------------
+
+REVISION D'ALGORITHMIE [Coeur du cours]: 
+- Comprendre la notion d'algorithme (activité qualitative)
+- Réviser les notions de bases boucles, etc.
+- Comment l'écrire en Python ? 
+- Exercices simples de Python (Pratique...)
+
+TRAITEMENT DES IMAGES (ie photographie numérique)
+- Qu'est-ce qu'une image ? (matrice de nombre)
+- Comment manipuler des images ? 
+- Machine learning (Les données structurées et leur traitement)
+
+LOCALISATION CARTOGRAPHIE ET MOBILITE 
+- Notion de temps et référentiel : Relativité restreinte, générale
+- Comment fonctionne un GPS ? 
+- Algorithme du plus court chemin (code Python ?)
+- Application dans d'autres domaines
+
+WEB
+- Faire son site internet (HTML CSS)
+
+RESEAUX SOCIAUX 
+- Exposé
+
+INTERNET
+- Exposé
+
+Exposés : 
+- Machine learning (Comment apprendre à une machine ? )
+- Comment fonctionne un GPS [] ? 
+- Les réseaux sociaux []
+- Internet []
+- Critique du film "the social network".
+- Critique de la série "Stalk".
+- Critique du film "Her".
+- Critique du film "Steve Jobs".
+- Critique de la série "WestWorld".
+- Critique de BlackMirror "Episode 1 saison 3".
+- Critique du film Ralph 2.0 (2019).
+- Dailymotion vs Youtube ? 
+- 

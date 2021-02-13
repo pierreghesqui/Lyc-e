@@ -1,0 +1,4 @@
+Incertitude type. Ecart type + nombre de mesures (racine carré). 
+TP : On a un becher, une éprouvette et un verre d'eau.
+Problématique : mesurer de la manière la plus précise qu'il soit la masse volumique de l'eau. 
+Un élève dit que c'est 0.99, un autre 1,1. Incertitude type. 

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Animation spectre d'une étoile</title>
+<link rel="stylesheet" href="./includes/style.css">
+<link rel="stylesheet" href="./includes/style1.css">
+<!--Bibliothèque JQuery -->
+<script src="lib/jquery-3.1.1.min.js"></script>
+<!--Bibliothèque EaselJs -->
+<script src="lib/createjs-2015.11.26.combined.js"></script>
+<script>var zon = true; // true pour des commentaires de Zim dans la console </script>
+<script src="lib/zim_5.3.0.js"></script><!-- bibliothèque et objets zimjs  -->
+
+</head>
+<body>
+<script>
+var scaling = "fit"; // Le canvas s'adapte à la taille de la fenètre du navigateur en conservant le rapport largeur/hauteur
+var width = 1224; // taille initiale.
+var height = 768;
+var color = "#acd241"; //couleur du fond
+var frame = new zim.Frame(scaling, width, height, color); // définition du cadre de la scène avec zimjs
+frame.on("ready", function() { // dès que la scène est prête.
+		zog("Le cadre ou la scène Zim frame est prête !!"); // commentaire pour la console		
+		// insérer votre code dans la fonction init() dans le fichier conteant votre programme projectile.js
+		init();
+	
+}); // end of ready
+</script>
+<script src= "spectre.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+----> Révision : p4 du programme. Echelle macro (espèce chimique, corps purs, mélanges, composition de l'air masse volumique)
+----> Livre scolaire : 
+THEME 1 : Constitution de la matière à l'échelle macroscopique et microscopique
+Chapitre 1 : Identification des espèces chimiques
+	Expérience de Lavoisier (constitution de l'air) 
+	Masse volumique
+	Solidification de l'eau distillée et de l'eau salée
+	CCM pour couleur de salade (?)
+	Bilan clair p27
+
+Chapitre 2 Composition des solutions aqueuses
+	Quantité de Sel contenu dans un plat
+	Sérum physiologique et conductivité (==> Dosage par étalonnage)
+	Masse de sucre dans une boisson
+	Bilan p46
+
+Chapitre 3 Dénombrer des entités
+	Constituant du basilic
+	Solide ionique
+	Quantité de matière et nombre d'avogadro
+	

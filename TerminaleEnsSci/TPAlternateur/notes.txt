@@ -1,0 +1,4 @@
+-Induction Electromagnétique (Maxwell-Faraday)
+-Elements d'un alternateur : Source de champ magnétique, fil conducteur mobile
+-Analyser les propriétés d'un alternateur
+-rendement d'un alternateur : phénomène influençant le rendement...?

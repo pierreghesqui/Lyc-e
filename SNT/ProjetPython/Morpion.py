@@ -3,6 +3,8 @@ import cv2
 import keyboard
 import time
 import random
+import pygame.mixer
+ 
 
 def updateMobilePosition ():
     global mobile
@@ -14,11 +16,11 @@ def updateMobilePosition ():
     if score == 6 or score ==30:
         caca = 1
     nbL,nbC = np.shape(mobile)
-    l1 = (mobile[0,nbC-1]-hpas)%sizeWindow
-    l2 = (mobile[0,nbC-1] +hpas)%sizeWindow
-    c1 = (mobile[1,nbC-1]-hpas)%sizeWindow
-    c2 = (mobile[1,nbC-1] + hpas)%sizeWindow
-    img[l1:l2,c1:c2,0] = 0
+    l1 = (mobile[0,nbC-1])%sizeWindow
+    l2 = (mobile[0,nbC-1] +pas-1)%sizeWindow
+    c1 = (mobile[1,nbC-1])%sizeWindow
+    c2 = (mobile[1,nbC-1] + pas-1)%sizeWindow
+    img[l1:l2+1,c1:c2+1,0] = 0
 
     #UpdateBody
     mobile[:,1:nbC]=mobile[:,0:nbC-1]
@@ -34,18 +36,18 @@ def updateMobilePosition ():
         mobile[1,0] = mobile[1,0] +pas
 
 
-    l1 = (mobile[0,0]-hpas)%sizeWindow
-    l2 = (mobile[0,0] +hpas)%sizeWindow
-    c1 = (mobile[1,0]-hpas)%sizeWindow
-    c2 = (mobile[1,0] + hpas)%sizeWindow
+    l1 = (mobile[0,0])%sizeWindow
+    l2 = (mobile[0,0] +pas-1)%sizeWindow
+    c1 = (mobile[1,0])%sizeWindow
+    c2 = (mobile[1,0] +pas-1)%sizeWindow
 
-    img[l1:l2,c1:c2,0] = 255
+    img[l1:l2+1,c1:c2+1,0] = 255
 
 def putSugar():
-
+    nbCase = sizeWindow/pas
     img[sugar[0,0]-10:sugar[0,0]+10,sugar[1,0]-10:sugar[1,0]+10,2] = 0
-    l = random.randint(100,sizeWindow-100)
-    c = random.randint(100,sizeWindow-100)
+    l = (random.randint(0,nbCase)*pas +hpas )%sizeWindow
+    c = (random.randint(0,nbCase)*pas +hpas)%sizeWindow
     sugar[0,0]=l
     sugar[1,0]=c
     img[l-10:l+10,c-10:c+10,2] = 255
@@ -54,10 +56,12 @@ def updateSugar():
     global score
     global pas
     global hpas
-    if (mobile[0,0]+hpas)%sizeWindow>=sugar[0,0] and (mobile[0,0]-hpas)%sizeWindow<=sugar[0,0] and (mobile[1,0]+hpas)%sizeWindow>=sugar[1,0]and  (mobile[1,0]-hpas)%sizeWindow<=sugar[1,0]:
+    if (mobile[0,0]+pas-1)%sizeWindow>=sugar[0,0] and (mobile[0,0])%sizeWindow<=sugar[0,0] and (mobile[1,0]+pas-1)%sizeWindow>=sugar[1,0]and  (mobile[1,0])%sizeWindow<=sugar[1,0]:
         putSugar()
+        sonManger = pygame.mixer.Sound('sonManger.mp3')
+        sonManger.play()
         score = score + 1
-        img[20:121,390:601,:]=0
+        img[20:121,390:601,1]=0
         cv2.putText(img, 'score : '+ str(score), (10,100), font, 3, (0, 255, 0), 2, cv2.LINE_AA)
 
         if score%3 == 0:
@@ -77,11 +81,11 @@ def mobileGrow():
         mobile = np.append(mobile, [[mobile[0,nbC-1]], [mobile[1,nbC-1]+pas]], axis=1)
     elif direction == 'right':
         mobile = np.append(mobile, [[mobile[0,nbC-1]], [mobile[1,nbC-1]-pas]], axis=1)
-    l1 = (mobile[0,nbC]-hpas)%sizeWindow
-    l2 = (mobile[0,nbC] +hpas)%sizeWindow
-    c1 = (mobile[1,nbC]-hpas)%sizeWindow
-    c2 = (mobile[1,nbC] +hpas)%sizeWindow
-    img[l1:l2,c1:c2,0] = 255
+    l1 = (mobile[0,nbC])%sizeWindow
+    l2 = (mobile[0,nbC] +pas-1)%sizeWindow
+    c1 = (mobile[1,nbC])%sizeWindow
+    c2 = (mobile[1,nbC] +pas-1)%sizeWindow
+    img[l1:l2+1,c1:c2+1,0] = 255
 
 def getFrame():
     updateSugar()
@@ -108,7 +112,11 @@ def checkIfDie():
     condition2 = mobile[1,1:nbC]==mobile[1,0]
     if np.any(np.logical_and(condition1,condition2)):
         gameOver=True
-
+        
+pygame.mixer.init()     
+pygame.mixer.music.load("musicMario.mp3")   # chargement de la musique
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play()
 
 mobile = np.zeros((2,1),dtype = int)
 sugar = np.zeros((2,1),dtype = int)
@@ -129,7 +137,7 @@ lb = 120
 c1 = 390
 c2 = 600
 
-while (not keyboard.is_pressed('a')) and not gameOver:
+while (not keyboard.is_pressed('ctrl')) and not gameOver:
 
     setDirection()
     getFrame()
@@ -139,6 +147,15 @@ while (not keyboard.is_pressed('a')) and not gameOver:
     cv2.waitKey(100)
     t2 = time.time()
     print(t2-t1)
+    
 
+pygame.mixer.stop()
 if gameOver:
+    
    cv2.imshow('image',imGameOver)
+   sonGameOver= pygame.mixer.Sound('gameOver.mp3')
+   sonGameOver.play()
+   cv2.waitKey(5000)
+pygame.mixer.stop()
+
+pygame.mixer.quit()

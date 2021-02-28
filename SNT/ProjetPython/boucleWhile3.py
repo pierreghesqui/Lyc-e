@@ -1,7 +1,8 @@
 var = 1
 
 while var <10:
-    var = var + 5
+    for i in range(1,5):
+        var = var + 1
 
 print(var)
 

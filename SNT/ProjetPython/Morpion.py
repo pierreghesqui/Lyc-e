@@ -13,8 +13,6 @@ def updateMobilePosition ():
     global hpas
     #Remove tail
     
-    if score == 6 or score ==30:
-        caca = 1
     nbL,nbC = np.shape(mobile)
     l1 = (mobile[0,nbC-1])%sizeWindow
     l2 = (mobile[0,nbC-1] +pas-1)%sizeWindow
@@ -64,7 +62,7 @@ def updateSugar():
         img[20:121,390:601,1]=0
         cv2.putText(img, 'score : '+ str(score), (10,100), font, 3, (0, 255, 0), 2, cv2.LINE_AA)
 
-        if score%3 == 0:
+        if score%1 == 0:
 
             mobileGrow()
 
@@ -115,7 +113,7 @@ def checkIfDie():
         
 pygame.mixer.init()     
 pygame.mixer.music.load("musicMario.mp3")   # chargement de la musique
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play()
 
 mobile = np.zeros((2,1),dtype = int)
@@ -149,7 +147,7 @@ while (not keyboard.is_pressed('ctrl')) and not gameOver:
     print(t2-t1)
     
 
-pygame.mixer.stop()
+pygame.mixer.music.stop()  
 if gameOver:
     
    cv2.imshow('image',imGameOver)

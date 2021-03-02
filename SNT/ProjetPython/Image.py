@@ -11,6 +11,8 @@ while cpt<100 :
     cv2.imshow('image',img) # Afficher l'image img (une icône apparait dans la 
                             # barre en bas de l'écran. Cliquez dessus)
     cv2.waitKey(100)        # Le programme attend 100ms avant de continuer
-    
+
+
+
 
  

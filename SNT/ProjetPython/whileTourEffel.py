@@ -1,5 +1,5 @@
 hauteurTourEffel = 324
-epaisseurPapier = 0.1
+epaisseurPapier = 0.0001
 cpt = 0
 
 while epaisseurPapier<hauteurTourEffel:
@@ -7,6 +7,8 @@ while epaisseurPapier<hauteurTourEffel:
     cpt = cpt+1
 
 print(cpt)
+
+
 
 
 

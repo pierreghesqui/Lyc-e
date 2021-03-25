@@ -1,0 +1,16 @@
+Activité 1 : Notion de système, référentiel et de réduction en 1 point et de vocabulaire (rectiligne, curviligne, circulaire)
+	- Mouvement d'une balle dans un train 
+	- Mouvement d'une valve de vélo
+	- Mouvement du marteau (réduction en 1 point)
+Activité 2 : Révision vecteur (origine, {direction, sens}, norme), Vecteur déplacement (python)
+Activité 3 : TP-Etude d'un mouvement rectiligne (découverte du vecteur vitesse)
+Activité 4 : Approfondissement vecteur vitesse (différentiation python ?)
+
+
+Notion de vecteur et de coordonée
+Notion de référentiel
+Notion de description par un point
+Notion d'échelle spatiale et d'échelle temporelle
+Notion de vecteur déplacement
+Notion de vecteur vitesse
+Vocabulaire : rectiligne, circulaire, curviligne, accéléré, ralenti

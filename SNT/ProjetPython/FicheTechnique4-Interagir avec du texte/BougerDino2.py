@@ -2,10 +2,9 @@ import numpy as np
 import cv2
 import keyboard 
 
-
 img = np.zeros((600,500))
 
-# Ennemi1
+# Dinosaure
 DinoLigne = 300
 DinoColonne = 0
 DinoHauteur = 50
@@ -27,15 +26,15 @@ while not keyboard.is_pressed('ctrl'):
         dinoJump = 1
     
     if dinoJump == 1 and dinoUp==1 :
-        #TODO : Faire Monter Le Dino de 10 lignes
-        if DinoLigne<ligneLimiteUp : 
-            #TODO : Modifier indicateur pour que le dino descende
+        #TODO : Faire Monter Le Dino de 1 ligne
+        #TODO : si le dinosaure dépasse la limite supérieure :
+            #TODO : Modifier dinoUp pour que le dino descende
         
     elif dinoJump == 1 and dinoUp==0:
-        #TODO : Faire Descendre le dino de 10 lignes
+        #TODO : Faire Descendre le dino de 1 ligne
         
-        if DinoLigne>ligneLimiteDown : 
-            #TODO : Modifier indicateur pour que le dino ne saute plus
+        #TODO : si le dinosaure dépasse la limite inférieure : 
+            #TODO : Modifier indicateur pour que le dino s'arrète de sauter
         
 cv2.destroyWindow('image1')
 

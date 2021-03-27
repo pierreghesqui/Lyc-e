@@ -7,7 +7,7 @@ img = np.zeros((600,500))
 
 # Ennemi1
 DinoLigne = 300
-DinoColonne = 100
+DinoColonne = 0
 DinoHauteur = 50
 DinoLargeur = 50
 img[DinoLigne:DinoLigne+DinoHauteur, DinoColonne:DinoColonne+DinoLargeur] = 1

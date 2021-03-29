@@ -63,7 +63,7 @@ def listeVecteurDeplacement(listV) :
     drapeau = cv2.resize(drapeau,(objetLargeur,objetLargeur))/255
     potion = cv2.imread('potion2.png')
     potion = cv2.resize(potion,(50,100))/255
-    img[675:725,575:625] = drapeau 
+    img[775:825,475:525] = drapeau 
     img[125:225,475:525] = potion
     enDehorsDeLaRoute =0
     crocoAvant=0
@@ -146,7 +146,20 @@ def listeVecteurDeplacement(listV) :
             c10.append(objetLigne+10)
         
     listeTemps.append(t)    
-
+    while cpt+1<=len(listLCroco)-1:
+                img[listLCroco[cpt]:listLCroco[cpt]+objetLargeur,listCCroco[cpt]:listCCroco[cpt]+objetLargeur]=0/255
+                cpt = cpt+1
+                img[listLCroco[cpt]:listLCroco[cpt]+objetLargeur,listCCroco[cpt]:listCCroco[cpt]+objetLargeur]=croco
+                img[objetLigne:objetLigne+objetLargeur,objetColonne:objetColonne+objetLargeur]=chaton
+                cv2.imshow('Jeu du chat',img)
+                cv2.waitKey(1)
+                t = np.round(100*(time.time()-t0))/100
+                img[0:26,900:1800]=1
+                cv2.putText(img,"Chrono : "+str(t)+" s",(1000,25), font, 0.75,(0,50/255,150/255),2,cv2.LINE_AA)
+                
+    tempsCroco = np.round(100*(time.time()-t0))/100
+    cv2.putText(img,"Le crocodile a mis " + str(tempsCroco)+ " s pour finir la course.",(950,850), font, 1,(0,50/255,0),2,cv2.LINE_AA)
+                
     for i in range(len(c1)):
         cv2.line(img,(c1[i],c2[i]),(c3[i],c4[i]),(0,50/255,150/255),3)
         cv2.line(img,(c5[i],c6[i]),(c7[i],c8[i]),(0,50/255,150/255),3)
@@ -158,12 +171,12 @@ def listeVecteurDeplacement(listV) :
     if win==0 or crocoAvant==1 or enDehorsDeLaRoute==1 :
         sonGameOver= pygame.mixer.Sound('gameOver.mp3')
         sonGameOver.play()   
-        cv2.putText(img,"You loose :(  ",(1100,800), font, 3,(1,50/255,1),2,cv2.LINE_AA)
+        cv2.putText(img,"Game Over :(  ",(1100,800), font, 3,(1,50/255,1),2,cv2.LINE_AA)
      
     elif win ==1 and enDehorsDeLaRoute==0 and crocoAvant==0:
         sonWin= pygame.mixer.Sound('win.mp3')
         sonWin.play()
-        cv2.putText(img,"You Win !! :) ",(1100,800), font, 3,(1,50/255,1),2,cv2.LINE_AA)
+        cv2.putText(img,"Bravo !! :) ",(1100,800), font, 3,(1,50/255,1),2,cv2.LINE_AA)
     cv2.imshow('Jeu du chat',img)
     cv2.waitKey(1)
     #cv2.imwrite('img2.png',img[0:900,0:900]*255)

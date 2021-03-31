@@ -11,7 +11,7 @@ def vecteurDeplacement(x,y):
           
     
 
-def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) : 
+def trajectoire(listV,potion='potion_1',factorMultiplier=1) : 
     cv2.destroyWindow('Jeu de chat')   #Destruction de la fenêtre précédente si elle existe 
     win=0 #variable qui dit si le chat a gagné ou pas
     potionMagique=0 #variable qui dit si le chat a bu la potion
@@ -23,7 +23,8 @@ def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) :
     listLCroco = np.loadtxt("listLCroco.txt", dtype=int) #Liste des positions du croco (lignes)
     listCCroco=np.loadtxt("listCCroco.txt", dtype=int) #Liste des positions du croco (Colonnes)
     font = cv2.FONT_HERSHEY_SIMPLEX
-    
+    strSplit = potion.split('_')
+    factorMultiplier = float(strSplit[1])
     #Création des coordonnées des vecteurs entrée par l'élève
     x=[]
     y=[]
@@ -66,7 +67,7 @@ def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) :
     drapeaudarrive = cv2.imread('drapeau.jpg')
     drapeaudarrive = cv2.resize(drapeaudarrive,(objetLargeur,objetLargeur))/255
     img[775:825,475:525] = drapeaudarrive 
-    if potion==0:
+    if potion=='potion_1':
         potionIm = cv2.imread('drapeauInt.png')
         potionIm = cv2.resize(potionIm,(50,50))/255
     else:
@@ -74,7 +75,7 @@ def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) :
         potionIm = cv2.resize(potionIm,(50,50))/255
         
     #Creation de la fenêtre
-    cv2.namedWindow('Jeu du chat',cv2.WINDOW_NORMAL) #Pour que l'image apparaisse correctement sur les ordinateurs du lycée
+    #cv2.namedWindow('Jeu du chat',cv2.WINDOW_NORMAL) #Pour que l'image apparaisse correctement sur les ordinateurs du lycée
     #cv2.resizeWindow('Jeu du chat',1200,900)
     
     #Liste des coordonnées pour tracer les points sous forme de croix
@@ -139,7 +140,7 @@ def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) :
                 
             #DETECTION POTION
             if 65<objetLigne and objetLigne<80 and 420<objetColonne and objetColonne<430 and potionMagique==0:
-                if potion ==0 :
+                if potion =='potion_1' :
                     laisserLaPositionDuCrocoAmiParcourt = 1
                     cptMiParcourt=cpt
                 else:
@@ -172,10 +173,15 @@ def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) :
     
     #Tant que le crocodile peut encore bouger, il bouge
     while cpt+1<=len(listLCroco)-1:
+        '''
         if laisserLaPositionDuCrocoAmiParcourt==1:
             crocoGrey = np.dstack((croco[:,:,0],croco[:,:,0],croco[:,:,0]))
             img[listLCroco[cptMiParcourt]:listLCroco[cptMiParcourt]+objetLargeur,listCCroco[cptMiParcourt]:listCCroco[cptMiParcourt]+objetLargeur]=crocoGrey
-            cv2.putText(img,"x = " + str(listCCroco[cptMiParcourt]+25)+ ", y = " + str(listLCroco[cptMiParcourt]+25) , (listCCroco[cptMiParcourt]-40,listLCroco[cptMiParcourt]+70),font, 0.5,(0,0.4,0.4),2,cv2.LINE_AA)
+            distanceRestanteCroco = int(np.round((18**0.5)*100+300+((200-listLCroco[cptMiParcourt])**2+(800-listCCroco[cptMiParcourt])**2)**0.5))
+            #cv2.putText(img,"Distance restant a parcourir ",(listCCroco[cptMiParcourt]-10,listLCroco[cptMiParcourt]+70),font, 0.5,(0,0.4,0.4),2,cv2.LINE_AA)
+            #cv2.putText(img,"= " + str(distanceRestanteCroco)+" pixels.",(listCCroco[cptMiParcourt]-10,listLCroco[cptMiParcourt]+90),font, 0.5,(0,0.4,0.4),2,cv2.LINE_AA)
+            #cv2.putText(img,"x = " + str(listCCroco[cptMiParcourt]+25)+ ", y = " + str(listLCroco[cptMiParcourt]+25) , (listCCroco[cptMiParcourt]-40,listLCroco[cptMiParcourt]+70),font, 0.5,(0,0.4,0.4),2,cv2.LINE_AA)
+        '''
         if potionMagique ==0:
             img[75:125,425:475] = potionIm
         
@@ -213,13 +219,16 @@ def listeVecteurDeplacement(listV,potion=0,factorMultiplier=1) :
     cv2.imshow('Jeu du chat',img)
     cv2.waitKey(1)
     #cv2.imwrite('img2.png',img[0:900,0:900]*255)
-    v1 = 600/(listeTemps[1]-listeTemps[0])
-    v2 = 300/(listeTemps[-2]-listeTemps[-3])
+    
+    v1 = (600+100*5**0.5+150)/(listeTemps[3]-listeTemps[0])
+    v2 = (1098)/(tempsCroco-listeTemps[3])
+    
     print(v1)
     print(v2)
     print(v2/v1)
+    
     while not keyboard.is_pressed('ctrl'): 
-        cv2.putText(img,"Appuie sur CTRL pour quitter",(200,450), font, 1,(100,100,100),2,cv2.LINE_AA)
+        cv2.putText(img,"Appuyer sur CTRL pour quitter",(200,450), font, 1,(100,100,100),2,cv2.LINE_AA)
         cv2.imshow('Jeu du chat',img)
         cv2.waitKey(1)
         

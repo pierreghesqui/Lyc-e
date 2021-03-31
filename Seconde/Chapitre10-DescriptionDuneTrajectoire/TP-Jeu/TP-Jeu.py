@@ -1,4 +1,4 @@
-from fonctionPotion import vecteurDeplacement, listeVecteurDeplacement
+from fonctionPotion import vecteurDeplacement, trajectoire
 
 M0M1 = vecteurDeplacement(0,600)
 M1M2 = vecteurDeplacement(200,100)
@@ -9,5 +9,5 @@ M6M7 = vecteurDeplacement(200,-100)
 M7M8 = vecteurDeplacement(0,-300)
 M8M9 = vecteurDeplacement(-300,-300)
 
-listeVecteurDeplacement([M0M1,M1M2,M2M3,M2M3,M6M7,M7M8,M8M9],'potion',1.7)
-#
+trajectoire([M0M1,M1M2,M2M3])
+

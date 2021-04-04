@@ -117,7 +117,7 @@ def trajectoireDuChat(listV,potion='potion_1',factorMultiplier=1) :
                 if potionMagique ==0:
                     img[75:125,425:475] = potionIm
                 img[listLCroco[cpt]:listLCroco[cpt]+objetLargeur,listCCroco[cpt]:listCCroco[cpt]+objetLargeur]=0/255
-                cpt = cpt+1
+                
                 t = np.round(100*(time.time()-t0))/100
                 img[0:26,900:1800]=1
                 cv2.putText(img,"Chrono : "+str(t)+" s",(910,25), font, 0.75,(0,50/255,150/255),2,cv2.LINE_AA)
@@ -130,8 +130,11 @@ def trajectoireDuChat(listV,potion='potion_1',factorMultiplier=1) :
                 objetColonneExact = objetColonneExact+deplacementColonne
                 objetLigne = int(np.round(objetLigneExact))
                 objetColonne = int(np.round(objetColonneExact))
-                
-                                    
+                if objetLigne<0 or objetLigne>899:
+                    continue
+                if objetColonne<0 or objetColonne>899: 
+                    continue
+                cpt = cpt+1                    
                 listObjetLigne.append(objetLigne)
                 listObjetColonne.append(objetColonne)
                 img[listLCroco[cpt]:listLCroco[cpt]+objetLargeur,listCCroco[cpt]:listCCroco[cpt]+objetLargeur]=croco

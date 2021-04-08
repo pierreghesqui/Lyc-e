@@ -151,11 +151,11 @@ pygame.mixer.music.stop()
 if gameOver or keyboard.is_pressed('ctrl'):
     
    
-   cv2.putText(imGameOver, 'score : '+ str(score), (50,210), font,2 , (0, 255, 0), 2, cv2.LINE_AA)
-   cv2.imshow('image',imGameOver)
-   sonGameOver= pygame.mixer.Sound('gameOver.mp3')
-   sonGameOver.play()
-   cv2.waitKey(5000)
+    cv2.putText(imGameOver, 'score : '+ str(score), (50,210), font,2 , (0, 255, 0), 2, cv2.LINE_AA)
+    cv2.imshow('image',imGameOver)
+    sonGameOver= pygame.mixer.Sound('gameOver.mp3')
+    sonGameOver.play()
+    cv2.waitKey(5000)
 pygame.mixer.stop()
 
 pygame.mixer.quit()

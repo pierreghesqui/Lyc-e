@@ -5,8 +5,10 @@ from sklearn import datasets, svm, metrics
 from sklearn.model_selection import train_test_split
 
 def montreLimage(image,label='label non indiqué'):
-    plt.imshow(image,cmap='gray', vmin=np.min(image), vmax=np.max(image))
+    fig, ax = plt.subplots(nrows=1, ncols=1)
+    ax.imshow(image,cmap='gray', vmin=np.min(image), vmax=np.max(image))
     plt.title(str(label))
+    ax.plot()
     
 def importationDesImagesEtLabels():
     digits = datasets.load_digits()
@@ -37,7 +39,7 @@ def aplatirImages(images):
     return imagesAplaties
 
 def representation2D (imagesAplaties,labels,carac1,carac2,possibleLabels=[0,1,2,3,4,5,6,7,8,9]):
-    plt.figure(1)
+    fig, ax = plt.subplots(nrows=1, ncols=1)
     plt.xlim([0, 20])
     plt.ylim([0, 20])
     colors = ['black','blue','orange','red','green','mediumpurple', 'lightslategrey','sandybrown','chartreuse','aquamarine']
@@ -45,14 +47,14 @@ def representation2D (imagesAplaties,labels,carac1,carac2,possibleLabels=[0,1,2,
         ind_label_i = labels==label_i
         image_label = imagesAplaties[ind_label_i,:]
         for k in range(len(image_label)):
-            print(image_label[k,carac1],image_label[k,carac2])
+            #print(image_label[k,carac1],image_label[k,carac2])
             plt.annotate(str(label_i),
                          (image_label[k,carac1],image_label[k,carac2]),
                          horizontalalignment='center',
                          verticalalignment='center',
                          size=11,
                          color=colors[label_i])
-    plt.plot()
+    ax.plot()
            
         
             

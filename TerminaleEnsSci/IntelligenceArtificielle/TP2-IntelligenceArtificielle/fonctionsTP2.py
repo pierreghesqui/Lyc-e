@@ -59,7 +59,10 @@ def montre2Caracteristiques (images,labels,carac1,carac2,possibleLabels=[0,1,2,3
                          color=colors[label_i])
     plt.xlabel("Valeur du pixel n° "+str(carac1),fontsize=13)
     plt.ylabel("Valeur du pixel n° "+str(carac2),fontsize=13)
-    plt.title ("Les différents chiffres sont-ils séparables ?", fontsize=15)
+    ax.set_xticks(np.arange(0, 17, 2))
+    ax.set_yticks(np.arange(0, 17, 2))
+    plt.grid()
+    plt.title ("montre2Caracteristiques(images, labels, "+ str(carac1)+", " + str(carac2)+ ", " +str(possibleLabels)+" )", fontsize=13)
     ax.plot()
            
         

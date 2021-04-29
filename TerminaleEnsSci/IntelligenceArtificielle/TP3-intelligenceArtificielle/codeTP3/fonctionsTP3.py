@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
+import random
 from sklearn import datasets, svm, metrics
 from sklearn.model_selection import train_test_split
+import cv2
 
 def montreLimage(image,label='label non indiqué'):
     fig, ax = plt.subplots(nrows=1, ncols=1)
@@ -11,24 +12,62 @@ def montreLimage(image,label='label non indiqué'):
         plt.title(str(label))
     ax.plot()
     
+def importerEnsembleEntrainement():
+    plt.close('all')
+    np.random.seed(1)
+    image,label = importationDesImagesEtLabels()
+    nbElement = np.shape(label)[0]
+    nbTest = int(0.003*nbElement)
+    L1 = np.ones((nbTest))
+    L2 = np.zeros((nbElement-nbTest))
+    L = np.concatenate((L1,L2))
+    np.random.shuffle(L)
+    imageTest = image[np.where(L)]
+    imageEntrainement = image[np.where(1-L)]
+    labelTest = label[np.where(L)]
+    labelEntrainement = label[np.where(1-L)]
+    
+    return imageEntrainement, labelEntrainement
+
+def importerEnsembleTest():
+    np.random.seed(1)
+    image,label = importationDesImagesEtLabels()
+    nbElement = np.shape(label)[0]
+    nbTest = int(0.003*nbElement)
+    L1 = np.ones((nbTest))
+    L2 = np.zeros((nbElement-nbTest))
+    L = np.concatenate((L1,L2))
+    np.random.shuffle(L)
+    imageTest = image[np.where(L)]
+    imageEntrainement = image[np.where(1-L)]
+    labelTest = label[np.where(L)]
+    labelEntrainement = label[np.where(1-L)]
+    return imageTest
+    
 def importationDesImagesEtLabels():
+    plt.close('all')
     digits = datasets.load_digits()
     images = digits.images
     Y = digits.target
     return images, Y
 
-def nearestNeighbour(x,X_train,y_train):
-    minimalDistance = 10*100
-    y = -1
-    for i in range(len(X_train)):
-        x_train_i = X_train[i]  
-        dist = np.linalg.norm(x-x_train_i)
-        if dist<minimalDistance:
-            minimalDistance = dist
-            y=y_train[i]
-    return y
+def importerUneImageTest(path):
+    imgTest = np.sum(255-cv2.imread(path),2)/(255*3)
+    imgTest = cv2.resize(imgTest,(8,8),interpolation=cv2.INTER_AREA)>0.015
+    imgTest = imgTest*16
+    return imgTest
 
-def transformeLimageEnListe(images):
+def distanceEntre2Images(img0,img1):
+    liste0 = transformeImageEnListe(img0)
+    liste1 = transformeImageEnListe(img1)
+    distance = distanceEntre2Listes(liste0,liste1)
+    return distance
+
+def distanceEntre2Listes(liste0,liste1):
+    distance = np.sqrt(np.sum((liste0-liste1)**2))
+    return distance
+
+def transformeImageEnListe(images):
     
     if len(images.shape)>2:
         s1,s2,s3 = images.shape
@@ -40,7 +79,7 @@ def transformeLimageEnListe(images):
     return imagesAplaties
 
 def montre2Caracteristiques (images,labels,carac1,carac2,possibleLabels=[0,1,2,3,4,5,6,7,8,9]):
-    imagesAplaties = transformeLimageEnListe(images)
+    imagesAplaties = transformeImageEnListe(images)
 
     fig, ax = plt.subplots(nrows=1, ncols=1)
     plt.xlim([0, 20])
